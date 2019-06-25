@@ -1,10 +1,11 @@
 const { ccclass, property } = cc._decorator;
-
+import EventDispatcher = require('../event/EventDispatcher');
+import Events = require('../event/Events');
 @ccclass
 class NetWorkManager {
     private static _instance = null;
     private _ws = null;
-    private _ip: string = "ws://192.168.0.239";
+    private _ip: string = "ws://192.168.1.185";
     private _port = 3000;
 
     public static getInstance() {
@@ -19,25 +20,26 @@ class NetWorkManager {
             this._ws = new WebSocket(this._ip + ":" + this._port);
         }
 
-        this._ws.onopen = this._onOpen;
-        this._ws.onmessage = this._onMessage;
-        this._ws.onerror = this._onError;
-        this._ws.onclose = this._onClose;
+        this._ws.onopen = this._handleOpen;
+        this._ws.onmessage = this._handleMessage;
+        this._ws.onerror = this._handleError;
+        this._ws.onclose = this._handleClose;
     }
 
-    private _onOpen(event) {
+    private _handleOpen(event) {
         console.log("Send Text WS was opened.");
+        EventDispatcher.getInstance().dispatch(Events.EVT_WS_OPEN);
     }
 
-    private _onMessage(event) {
+    private _handleMessage(event) {
         console.log("response text msg: " + event.data);
     }
 
-    private _onError(event) {
+    private _handleError(event) {
         console.log("Send Text fired an error");
     }
 
-    private _onClose(event) {
+    private _handleClose(event) {
         console.log("WebSocket instance closed.");
     }
 
