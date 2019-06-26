@@ -19,41 +19,41 @@ class LoginScene extends cc.Component {
         // Util.loadRemoteImg(this.avatar.getComponent(cc.Sprite), " https://wx.qlogo.cn/mmopen/vi_32/K8Xo1DPvO6gxqlPBXjqBdO7dAlpsYWhQ7fhfvniagvR78lGW1uTXKfXg2ZFUUVH0p7d9gojbUVBNbK64kQb4n1A/132");
         if (Util.isWXGame()) {
             let self = this;
-            window['wx'].getSetting({
-                success(res) {
-                    if (res.authSetting['scope.userInfo']) {
-                        // 已经授权，可以直接调用 getUserInfo 获取头像昵称
-                        let systemInfo = window['wx'].getSystemInfoSync();
-                        let button = window['wx'].createUserInfoButton({
-                            type: 'text',
-                            text: '',
-                            style: {
-                                left: 0,
-                                top: 0,
-                                width: systemInfo.screenWidth,
-                                height: systemInfo.screenHeight,
-                                lineHeight: 40,
-                                // backgroundColor: '#ff0000',
-                                // color: '#ffffff',
-                                // textAlign: 'center',
-                                // fontSize: 16,
-                                // borderRadius: 4
-                            }
-                        })
-                        button.onTap((res) => {
-                            console.log(res)
-                             Util.loadRemoteImg(self.avatar.getComponent(cc.Sprite), res.userInfo.avatarUrl);
-                        })
-                    } else {
-                        window['wx'].authorize({
-                            scope: 'scope.userInfo',
-                            success() {
-
-                            }
-                        })
-                    }
+            // window['wx'].getSetting({
+            //     success(res) {
+            //         if (res.authSetting['scope.userInfo']) {
+            // 已经授权，可以直接调用 getUserInfo 获取头像昵称
+            let systemInfo = window['wx'].getSystemInfoSync();
+            let button = window['wx'].createUserInfoButton({
+                type: 'text',
+                text: '',
+                style: {
+                    left: 0,
+                    top: 0,
+                    width: systemInfo.screenWidth,
+                    height: systemInfo.screenHeight,
+                    lineHeight: 40,
+                    // backgroundColor: '#ff0000',
+                    // color: '#ffffff',
+                    // textAlign: 'center',
+                    // fontSize: 16,
+                    // borderRadius: 4
                 }
             })
+            button.onTap((res) => {
+                console.log(res)
+                Util.loadRemoteImg(self.avatar.getComponent(cc.Sprite), res.userInfo.avatarUrl);
+            })
+            //     } else {
+            //         window['wx'].authorize({
+            //             scope: 'scope.userInfo',
+            //             success() {
+
+            //             }
+            //         })
+            //     }
+            // }
+            // })
 
             // window['wx'].login({
             //     success(res) {
