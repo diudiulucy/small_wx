@@ -13,6 +13,10 @@ class Util {
     public static isWXGame() {
         return cc.sys.platform == cc.sys.WECHAT_GAME;
     }
+
+    public static randomRange(m, n) {
+        return Math.round(Math.random() * (m - n)) + n;
+    }
 }
 
 export = Util;
