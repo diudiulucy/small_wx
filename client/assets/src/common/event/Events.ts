@@ -1,7 +1,8 @@
 enum Events{
     //sockets
     EVT_WS_OPEN = 'EVT_WS_OPEN',
-
+    EVT_WS_CLOSE = 'EVT_WS_CLOSE',
+    EVT_WS_ERROR = 'EVT_WS_ERROR',
 
 
     EVT_MISS  = 'EVT_MISS',
@@ -11,4 +12,4 @@ enum Events{
 
 }
 
-export = Events;
+export = Events;// Learn TypeScript:
